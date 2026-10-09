@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gram Panchayat Exam - Hard Level English Mock Test (50 Marks)</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --secondary: #2563eb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --correct: #16a34a;
+      --wrong: #dc2626;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      color: var(--primary);
+      margin-bottom: 5px;
+      font-size: 24px;
+    }
+
+    .header p {
+      margin: 5px 0;
+      color: #64748b;
+    }
+
+    .timer-container {
+      position: sticky;
+      top: 10px;
+      background: #f1f5f9;
+      padding: 12px 20px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      z-index: 100;
+      border: 1px solid #cbd5e1;
+    }
+
+    .timer {
+      color: var(--wrong);
+      font-size: 18px;
+    }
+
+    .q-card {
+      margin-top: 25px;
+      padding: 18px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+
+    .q-text {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .options label {
+      display: block;
+      padding: 10px 14px;
+      margin: 6px 0;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .options label:hover {
+      background: #eff6ff;
+      border-color: var(--secondary);
+    }
+
+    .options input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .explanation {
+      display: none;
+      margin-top: 12px;
+      padding: 10px;
+      background-color: #e0f2fe;
+      border-left: 4px solid var(--secondary);
+      font-size: 14px;
+      color: #0369a1;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    .submit-btn:hover {
+      background: var(--secondary);
+    }
+
+    #result-panel {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background: #dcfce7;
+      border: 2px solid var(--correct);
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    #result-panel h2 {
+      color: var(--correct);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Gram Panchayat Recruitment - English Special Mock Test</h1>
+    <p><strong>Level:</strong> Advanced / Hard | <strong>Total Marks:</strong> 50 | <strong>Time:</strong> 45 Mins</p>
+  </div>
+
+  <div class="timer-container">
+    <span>Gram Panchayat Recruitment Cell</span>
+    <span class="timer" id="timer">Time Remaining: 45:00</span>
+  </div>
+
+  <div id="result-panel">
+    <h2 id="score-text">Your Score: 0 / 50</h2>
+    <p id="accuracy-text"></p>
+  </div>
+
+  <form id="quiz-form">
+    <div id="questions-container"></div>
+    <button type="button" class="submit-btn" onclick="submitQuiz()">Submit Test & Check Answers</button>
+  </form>
+</div>
+
+<script>
+const quizData = [
+  // 1-10 Vocabulary & Idioms
+  {
+    q: "1. Select the most appropriate synonym for the underlined word: The minister's <u style='color:#2563eb'>pusillanimous</u> response during the crisis outraged the public.",
+    options: ["Courageous", "Timid", "Magnanimous", "Audacious"],
+    ans: 1,
+    exp: "Pusillanimous means lacking courage or timid."
+  },
+  {
+    q: "2. Choose the correct antonym of 'INCHOATE':",
+    options: ["Formless", "Fledged", "Rudimentary", "Incipient"],
+    ans: 1,
+    exp: "Inchoate means just beginning/undeveloped; Fledged means fully developed."
+  },
+  {
+    q: "3. Idiom Meaning: 'To burn the candle at both ends' means -",
+    options: ["To waste money foolishly", "To work exhausting hours without rest", "To be extremely stingy", "To create unnecessary conflict"],
+    ans: 1,
+    exp: "To burn the candle at both ends means to exhaust oneself by working late and rising early."
+  },
+  {
+    q: "4. Idiom Meaning: 'A Pyrrhic victory' refers to -",
+    options: ["A victory achieved through deceit", "A victory that comes at too high a cost", "A decisive and easy victory", "A victory celebrated worldwide"],
+    ans: 1,
+    exp: "A Pyrrhic victory is a victory won at such a devastating cost that it equals defeat."
+  },
+  {
+    q: "5. Select the correct One-Word Substitution: 'A person who dislikes or distrusts humanity in general.'",
+    options: ["Philanthropist", "Misanthrope", "Misogynist", "Altruist"],
+    ans: 1,
+    exp: "Misanthrope is a person who hates or avoids human society."
+  },
+  {
+    q: "6. Select the correctly spelt word:",
+    options: ["Superintendant", "Superintendent", "Superintendent", "Supperintendent"],
+    ans: 1,
+    exp: "The correct spelling is 'Superintendent'."
+  },
+  {
+    q: "7. One-Word Substitution: 'Extreme exaggeration used to make a point or create an impression.'",
+    options: ["Litotes", "Hyperbole", "Euphemism", "Oxymoron"],
+    ans: 1,
+    exp: "Hyperbole refers to exaggerated statements not meant to be taken literally."
+  },
+  {
+    q: "8. Select the synonym of 'OBSEQUIOUS':",
+    options: ["Domineering", "Servile", "Arrogant", "Indifferent"],
+    ans: 1,
+    exp: "Obsequious means obedient or attentive to a servile degree."
+  },
+  {
+    q: "9. Choose the correct antonym of 'EPHEMERAL':",
+    options: ["Transient", "Perpetual", "Fleeting", "Evanescent"],
+    ans: 1,
+    exp: "Ephemeral means lasting a short time; Perpetual means everlasting."
+  },
+  {
+    q: "10. Idiom Meaning: 'To throw down the gauntlet' means -",
+    options: ["To surrender gracefully", "To issue a challenge", "To accept defeat", "To make peace"],
+    ans: 1,
+    exp: "To throw down the gauntlet means to issue a formal challenge."
+  },
+
+  // 11-20 Grammar & Subject-Verb Agreement
+  {
+    q: "11. Fill in the blank: Neither the Secretary nor the Block Development Officers _______ present at the meeting yesterday.",
+    options: ["was", "were", "is", "have been"],
+    ans: 1,
+    exp: "When two subjects are joined by 'neither...nor', the verb agrees with the subject nearest to it (Officers = plural = were)."
+  },
+  {
+    q: "12. Fill in the blank: The Prime Minister, along with his cabinet ministers, _______ expected to visit the Panchayat building tomorrow.",
+    options: ["are", "is", "were", "have been"],
+    ans: 1,
+    exp: "When subjects are connected by 'along with', the verb agrees with the first subject (The Prime Minister = singular = is)."
+  },
+  {
+    q: "13. Choose the grammatically correct sentence:",
+    options: [
+      "Scarcely had I reached the station than the train left.",
+      "Scarcely had I reached the station when the train left.",
+      "Scarcely I reached the station when the train left.",
+      "Scarcely had I reached the station then the train left."
+    ],
+    ans: 1,
+    exp: "'Scarcely...had' takes 'when' (not 'than' or 'then') and follows inversion."
+  },
+  {
+    q: "14. Fill in the blank: Two-thirds of the village funds _______ already been utilized for road construction.",
+    options: ["has", "have", "is", "was"],
+    ans: 1,
+    exp: "'Two-thirds of' followed by a plural countable noun (funds) takes a plural verb (have)."
+  },
+  {
+    q: "15. Choose the correct option: If he _______ harder, he would have cleared the Panchayat Audit Exam.",
+    options: ["worked", "had worked", "has worked", "would work"],
+    ans: 1,
+    exp: "Third Conditional Rule: If + Had + V3, Subject + would have + V3."
+  },
+  {
+    q: "16. Fill in the blank: Not only the Sarpanch but also the villagers _______ protesting against the illegal encroachment.",
+    options: ["was", "is", "are", "has been"],
+    ans: 2,
+    exp: "With 'Not only... but also', the verb agrees with the nearest subject (villagers = plural = are)."
+  },
+  {
+    q: "17. Choose the correct sentence:",
+    options: [
+      "He is one of those men who does not compromise.",
+      "He is one of those men who do not compromise.",
+      "He is one of those man who do not compromise.",
+      "He is one of those men which do not compromise."
+    ],
+    ans: 1,
+    exp: "'One of those + plural noun + who' takes a PLURAL verb because 'who' refers to 'men'."
+  },
+  {
+    q: "18. Fill in the blank: Fifty thousand rupees _______ a large amount for a rural project.",
+    options: ["are", "is", "were", "have been"],
+    ans: 1,
+    exp: "A specific sum of money considered as a single unit takes a singular verb (is)."
+  },
+  {
+    q: "19. Fill in the blank: Bread and butter _______ wholesome food for breakfast.",
+    options: ["are", "is", "were", "have"],
+    ans: 1,
+    exp: "When two nouns express a single idea/item (Bread and butter), a singular verb is used."
+  },
+  {
+    q: "20. Complete the sentence: No sooner did the Executive Officer enter the hall _______ the staff stood up.",
+    options: ["when", "then", "than", "before"],
+    ans: 2,
+    exp: "'No sooner' is always followed by 'than'."
+  },
+
+  // 21-30 Prepositions & Phrasal Verbs
+  {
+    q: "21. Fill in the correct preposition: The BDO acceded _______ the demands of the local Panchayat workers.",
+    options: ["with", "to", "at", "for"],
+    ans: 1,
+    exp: "'Accede' takes the fixed preposition 'to'."
+  },
+  {
+    q: "22. Fill in the correct preposition: He is completely absorbed _______ his administrative research work.",
+    options: ["in", "at", "with", "upon"],
+    ans: 0,
+    exp: "'Absorbed' takes the preposition 'in'."
+  },
+  {
+    q: "23. Choose the appropriate preposition: The offender was absolved _______ all charges due to lack of evidence.",
+    options: ["from", "of", "with", "by"],
+    ans: 1,
+    exp: "'Absolve' takes the fixed preposition 'of' (or 'from'). 'Absolved of' is preferred in legal charges."
+  },
+  {
+    q: "24. Phrasal Verb: The Chairman _______ the proposal put forward by the opposition members.",
+    options: ["turned down", "turned up", "turned off", "turned into"],
+    ans: 0,
+    exp: "'Turn down' means to reject an offer or proposal."
+  },
+  {
+    q: "25. Fill in the preposition: You must abide _______ the rules laid down by the Gram Sabha.",
+    options: ["with", "by", "to", "at"],
+    ans: 1,
+    exp: "'Abide' takes the preposition 'by' (Abide by = to obey)."
+  },
+  {
+    q: "26. Fill in the preposition: She takes pride _______ her clean village administration.",
+    options: ["on", "of", "in", "for"],
+    ans: 2,
+    exp: "Takes pride 'in' (Note: Proud takes 'of')."
+  },
+  {
+    q: "27. Fill in the preposition: The contractor was accused _______ embezzling government funds.",
+    options: ["for", "of", "with", "about"],
+    ans: 1,
+    exp: "'Accuse' takes the preposition 'of'."
+  },
+  {
+    q: "28. Choose the correct phrasal verb: The epidemic _______ in the flood-affected Panchayat areas.",
+    options: ["broke out", "broke up", "broke into", "broke off"],
+    ans: 0,
+    exp: "'Break out' means to start suddenly (used for disease, fire, war)."
+  },
+  {
+    q: "29. Fill in the preposition: He refrained _______ making any comments on the ongoing enquiry.",
+    options: ["from", "to", "with", "at"],
+    ans: 0,
+    exp: "'Refrain' and 'Abstain' take the preposition 'from'."
+  },
+  {
+    q: "30. Fill in the preposition: The committee's report is congruent _______ our initial findings.",
+    options: ["to", "with", "by", "for"],
+    ans: 1,
+    exp: "'Congruent' takes the preposition 'with'."
+  },
+
+  // 31-40 Error Spotting (Hard Level)
+  {
+    q: "31. Spot the Error: (A) One of the most / (B) urgent task in rural development / (C) is providing clean drinking water. / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 1,
+    exp: "Error in Part B: After 'One of the', the noun must be plural ('urgent tasks')."
+  },
+  {
+    q: "32. Spot the Error: (A) The cattle is grazing / (B) in the Panchayat field / (C) near the river bank. / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 0,
+    exp: "Error in Part A: 'Cattle' is a collective noun that takes a PLURAL verb ('The cattle ARE grazing')."
+  },
+  {
+    q: "33. Spot the Error: (A) Unless you do not work hard, / (B) you cannot pass / (C) the competitive examination. / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 0,
+    exp: "Error in Part A: 'Unless' itself has a negative meaning. Remove 'do not' ('Unless you work hard')."
+  },
+  {
+    q: "34. Spot the Error: (A) He is senior / (B) than me in service / (C) by three years. / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 1,
+    exp: "Error in Part B: Latin comparatives like Senior, Junior, Superior take 'to' instead of 'than' ('senior to me')."
+  },
+  {
+    q: "35. Spot the Error: (A) Suppose if / (B) the BDO refuses your request, / (C) what will you do? / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 0,
+    exp: "Error in Part A: 'Suppose' and 'If' mean the same thing. Do not use them together (Use either 'Suppose' or 'If')."
+  },
+  {
+    q: "36. Spot the Error: (A) The sceneries of / (B) the Himalayan rural region / (C) are breathtaking. / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 0,
+    exp: "Error in Part A: 'Scenery' is an uncountable noun. It has no plural form 'sceneries'."
+  },
+  {
+    q: "37. Spot the Error: (A) Each of the candidates / (B) have submitted their documents / (C) before the deadline. / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 1,
+    exp: "Error in Part B: 'Each of' takes a singular verb ('HAS submitted')."
+  },
+  {
+    q: "38. Spot the Error: (A) I prefer reading / (B) books than watching / (C) television in my free time. / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 1,
+    exp: "Error in Part B: 'Prefer' takes 'to' instead of 'than' ('prefer reading to watching')."
+  },
+  {
+    q: "39. Spot the Error: (A) My father gave me / (B) two important informations / (C) regarding the job vacancy. / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 1,
+    exp: "Error in Part B: 'Information' is an uncountable noun. Use 'two pieces of information'."
+  },
+  {
+    q: "40. Spot the Error: (A) Ten miles are / (B) a long distance / (C) to walk on foot. / (D) No Error",
+    options: ["Part A", "Part B", "Part C", "Part D"],
+    ans: 0,
+    exp: "Error in Part A: A specific distance takes a singular verb ('Ten miles IS')."
+  },
+
+  // 41-50 Voice, Narration & Advanced Transformations
+  {
+    q: "41. Change the Voice: 'The committee is discussing the development proposal.'",
+    options: [
+      "The development proposal was discussed by the committee.",
+      "The development proposal is being discussed by the committee.",
+      "The development proposal has been discussed by the committee.",
+      "The development proposal is discussed by the committee."
+    ],
+    ans: 1,
+    exp: "Present Continuous Passive: Object + is/am/are + being + V3 + by + Subject."
+  },
+  {
+    q: "42. Change the Voice: 'Who wrote this official report?'",
+    options: [
+      "By whom was this official report written?",
+      "By whom is this official report written?",
+      "Who was written this official report?",
+      "By whom had this official report been written?"
+    ],
+    ans: 0,
+    exp: "Interrogative Simple Past Passive: 'Who' changes to 'By whom' + was + Object + V3."
+  },
+  {
+    q: "43. Change the Narration: The Officer said, 'Honesty is the best policy.'",
+    options: [
+      "The Officer said that honesty was the best policy.",
+      "The Officer said that honesty is the best policy.",
+      "The Officer advised that honesty is the best policy.",
+      "The Officer told that honesty had been the best policy."
+    ],
+    ans: 1,
+    exp: "Universal Truths or Proverb tense does NOT change in indirect speech."
+  },
+  {
+    q: "44. Change the Narration: He said to me, 'Where are you going for the survey?'",
+    options: [
+      "He asked me where I was going for the survey.",
+      "He asked me where was I going for the survey.",
+      "He told me where I am going for the survey.",
+      "He inquired me that where I was going for the survey."
+    ],
+    ans: 0,
+    exp: "WH-questions retain the WH-word and change into assertive word order (Subject + Verb)."
+  },
+  {
+    q: "45. Transformation: Transform into Negative without changing meaning: 'As soon as he saw the auditor, he fled.'",
+    options: [
+      "No sooner did he see the auditor than he fled.",
+      "No sooner he saw the auditor when he fled.",
+      "He saw the auditor and he did not flee.",
+      "No sooner had he seen the auditor then he fled."
+    ],
+    ans: 0,
+    exp: "'As soon as' transforms to 'No sooner did + V1 ... than'."
+  },
+  {
+    q: "46. Change the Voice: 'Shut the main gate of the Panchayat office.'",
+    options: [
+      "Let the main gate of the Panchayat office be shut.",
+      "The main gate of the Panchayat office should shut.",
+      "You are requested to shut the main gate.",
+      "Let shut the main gate of the Panchayat office."
+    ],
+    ans: 0,
+    exp: "Imperative Passive: Let + Object + be + V3."
+  },
+  {
+    q: "47. Change the Narration: She said, 'Alas! I have lost my original documents.'",
+    options: [
+      "She exclaimed with joy that she had lost her original documents.",
+      "She exclaimed with sorrow that she had lost her original documents.",
+      "She exclaimed with sorrow that I have lost my original documents.",
+      "She cried that she lost her original documents."
+    ],
+    ans: 1,
+    exp: "'Alas!' changes to 'exclaimed with sorrow' + reported speech in past perfect."
+  },
+  {
+    q: "48. Sentence Join: Join using a Participle: 'He finished his report. He submitted it to the BDO.'",
+    options: [
+      "Having finished his report, he submitted it to the BDO.",
+      "He finished his report and submitted it to the BDO.",
+      "Because he finished his report so he submitted it to the BDO.",
+      "When finishing his report he submitted it to the BDO."
+    ],
+    ans: 0,
+    exp: "Perfect Participle structure: 'Having + V3' is used for sequential past actions."
+  },
+  {
+    q: "49. Choose the Passive form: 'One should keep one's promises.'",
+    options: [
+      "One's promises should be kept by one.",
+      "Promises should be kept.",
+      "One should be kept promises.",
+      "Promises must keep by one."
+    ],
+    ans: 1,
+    exp: "Indefinite pronoun 'One' is omitted in passive voice: 'Promises should be kept.'"
+  },
+  {
+    q: "50. Degree Change: 'No other village in the district is as clean as Sundarpur.' (Superlative)",
+    options: [
+      "Sundarpur is cleaner than any village in the district.",
+      "Sundarpur is the cleanest village in the district.",
+      "Sundarpur is a clean village in the district.",
+      "Sundarpur is one of the cleanest villages in the district."
+    ],
+    ans: 1,
+    exp: "'No other... as' transforms to 'Subject + is the + Superlative Degree'."
+  }
+];
+
+// Load Questions
+function loadQuiz() {
+  const container = document.getElementById('questions-container');
+  quizData.forEach((item, index) => {
+    const qDiv = document.createElement('div');
+    qDiv.className = 'q-card';
+    
+    let optionsHTML = '';
+    item.options.forEach((opt, oIndex) => {
+      optionsHTML += `
+        <label>
+          <input type="radio" name="q${index}" value="${oIndex}">
+          ${opt}
+        </label>
+      `;
+    });
+
+    qDiv.innerHTML = `
+      <div class="q-text">${item.q}</div>
+      <div class="options">${optionsHTML}</div>
+      <div class="explanation" id="exp-${index}">
+        <strong>Explanation:</strong> ${item.exp}
+      </div>
+    `;
+    container.appendChild(qDiv);
+  });
+}
+
+// Timer Script
+let totalTime = 45 * 60; // 45 minutes
+const timerElement = document.getElementById('timer');
+
+const timerInterval = setInterval(() => {
+  const minutes = Math.floor(totalTime / 60);
+  const seconds = totalTime % 60;
+  timerElement.textContent = `Time Remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  totalTime--;
+
+  if (totalTime < 0) {
+    clearInterval(timerInterval);
+    alert('Time is up! Submitting test automatically.');
+    submitQuiz();
+  }
+}, 1000);
+
+// Submit Quiz
+function submitQuiz() {
+  clearInterval(timerInterval);
+  let score = 0;
+  
+  quizData.forEach((item, index) => {
+    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+    const expDiv = document.getElementById(`exp-${index}`);
+    expDiv.style.display = 'block';
+
+    if (selected) {
+      const userAns = parseInt(selected.value);
+      if (userAns === item.ans) {
+        score++;
+        selected.parentElement.style.backgroundColor = '#dcfce7';
+        selected.parentElement.style.borderColor = '#16a34a';
+      } else {
+        selected.parentElement.style.backgroundColor = '#fee2e2';
+        selected.parentElement.style.borderColor = '#dc2626';
+      }
+    }
+  });
+
+  const resultPanel = document.getElementById('result-panel');
+  const scoreText = document.getElementById('score-text');
+  const accuracyText = document.getElementById('accuracy-text');
+
+  resultPanel.style.display = 'block';
+  scoreText.textContent = `Your Score: ${score} / 50`;
+  accuracyText.textContent = `Percentage: ${(score / 50 * 100).toFixed(2)}%`;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+loadQuiz();
+</script>
+
+</body>
+</html>
